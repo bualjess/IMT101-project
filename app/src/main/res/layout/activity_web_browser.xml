@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    tools:context=".WebBrowser">
+
+    <RelativeLayout
+        android:id="@+id/inputFields"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/rounded_corners"
+        android:padding="8dp">
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btnCloseWebBroswer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_baseline_close_white" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/urlInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginHorizontal="16dp"
+            android:layout_toStartOf="@id/btnRefreshWebView"
+            android:layout_toEndOf="@id/btnCloseWebBroswer"
+            android:background="@null"
+            android:textColorLink="@color/black"
+            android:inputType="textUri"
+            android:imeOptions="actionGo"
+            android:singleLine="true"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btnRefreshWebView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="42dp"
+            android:src="@drawable/ic_baseline_refresh_24" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btnMore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="11dp"
+            android:src="@drawable/ic_baseline_more_vert_24" />
+
+
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:layout_below="@id/inputFields"
+        android:id="@+id/divider"/>
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="match_parent"
+        android:layout_height="6dp"
+        android:layout_below="@id/inputFields"
+
+        android:visibility="invisible"
+        style="?android:attr/progressBarStyleHorizontal"/>
+    <WebView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/divider"
+        android:id="@+id/web_View"/>
+
+
+</RelativeLayout>
