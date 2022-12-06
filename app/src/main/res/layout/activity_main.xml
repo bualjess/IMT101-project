@@ -4,32 +4,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/generateqr"
-        android:layout_width="165dp"
-        android:layout_height="69dp"
-        android:layout_gravity="center_vertical|center_horizontal"
-        android:text="Generate QR"
+        android:id="@+id/btnLogin"
+        android:layout_width="272dp"
+        android:layout_height="100dp"
+        android:textSize="30dp"
+        android:gravity="center"
+        android:text="Login To your Falconnect Account"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.487"
+        app:layout_constraintHorizontal_bias="0.589"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.389"
-        android:onClick="move_to_generate_qr"/>
+        app:layout_constraintVertical_bias="0.568" />
 
-    <Button
-        android:id="@+id/btn_scan_qr"
-        android:layout_width="165dp"
-        android:layout_height="69dp"
-        android:text="Scan QR"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="284dp"
+        android:layout_height="74dp"
+        android:gravity="center"
+        android:text="Welcome Student"
+        android:textColor="@color/black"
+        android:textSize="60dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnLogin"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.645"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.535"
-        />
+        app:layout_constraintVertical_bias="0.487" />
 </androidx.constraintlayout.widget.ConstraintLayout>

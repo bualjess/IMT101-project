@@ -23,7 +23,7 @@ import com.journeyapps.barcodescanner.ScanContract;
 import com.journeyapps.barcodescanner.ScanOptions;
 
 public class MainActivity extends AppCompatActivity {
-         Button btn_scanqr;
+         Button btnSignIn;
          GoogleSignInOptions gso;
          GoogleSignInClient gsc;
 
@@ -31,68 +31,24 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         //setting up google sign in
+
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
         gsc = GoogleSignIn.getClient(this, gso);
+      //check if there is a user signed in already
+        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
+        if (acct != null){
+            gotoMainActivity2();
+        }
+        btnSignIn= findViewById(R.id.btnLogin);
+        btnSignIn.setOnClickListener(v->{
+            //start sign in
+            signIn();
 
-        btn_scanqr = findViewById(R.id.btn_scan_qr);
-        btn_scanqr.setOnClickListener(v->{
-            scanCameraCode();
         });
     }
-    //qr code scanner options
-    private void scanCameraCode() {
-        ScanOptions options = new ScanOptions();
-        options.setPrompt("Volume up to flash on");
-        options.setBeepEnabled(true);
-        options.setOrientationLocked(true);
-        options.setCaptureActivity(CaptureAct.class);
-        barLauncher.launch(options);
-    }
 
-    //read  qr code content
-    ActivityResultLauncher<ScanOptions> barLauncher = registerForActivityResult(new ScanContract(), result -> {
-        //checking for an OK string
-        if (result.getContents().contains("OK")) {
-            //Success, it contained the string "OK"
-            //do something when qr code is scanned
-            //login but make sure @hnu.edu.ph email will be allowed
-            //if successful, make sure student registered in class will be allowed to open form
-            AlertDialog.Builder builder = new AlertDialog.Builder (this);
-            builder.setTitle("Result");
-            builder.setMessage(result.getContents());
-            builder.setCancelable(true);
-            //alert user with choice to login or cancel
-            builder.setPositiveButton("login", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    //do the login here
-                    //signIn();
-
-                }
-            });
-            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    dialogInterface.cancel();
-                }
-            }).show();
-        }
-        else {
-            //Scanned QR did not contain the OK
-            AlertDialog.Builder builder = new AlertDialog.Builder (this);
-            builder.setTitle("ERROR!");
-            builder.setMessage("Invalid QR Code");
-            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    dialogInterface.dismiss();
-                }
-            }).show();
-
-
-        }
-    });
       void signIn (){
           Intent signInIntent =  gsc.getSignInIntent();
           startActivityForResult(signInIntent,1000);
@@ -111,11 +67,16 @@ public class MainActivity extends AppCompatActivity {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
                 task.getResult(ApiException.class);
-                /* i'm supposed to open a browser here */
-                //moveTOScanQr();
+               //open the other main Activity
+                gotoMainActivity2();
             } catch (ApiException e) {
                 Toast.makeText(getApplicationContext(),"Something went wrong",Toast.LENGTH_SHORT).show();
             }
         }
+    }
+    void gotoMainActivity2(){
+        finish();
+        Intent intent = new Intent(MainActivity.this, MainActivity2.class);
+        startActivity(intent);
     }
 }
